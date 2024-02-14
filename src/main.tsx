@@ -1,19 +1,24 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App.tsx';
-import './index.css';
-import { CreateCrewmate } from './pages/CreateCrewmate/CreateCrewmate.tsx';
+import { Layout } from './views/Layout/Layout.tsx';
+import { Create } from './pages/Create/Create.tsx';
 import { Gallery } from './pages/Gallery/Gallery.tsx';
+import { Home } from './pages/Home/Home.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Layout />,
     children: [
       {
+        path: '/',
+        element: <Home />,
+      },
+      {
         path: 'create',
-        element: <CreateCrewmate />,
+        element: <Create />,
       },
       {
         path: 'gallery',

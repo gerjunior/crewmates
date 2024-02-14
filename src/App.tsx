@@ -1,9 +1,9 @@
-import { Menu } from './views/Menu';
+import { Layout } from './views/Layout/Layout';
 
 function App() {
   return (
     <div className='h-screen'>
-      <Menu />
+      <Layout />
     </div>
   );
 }

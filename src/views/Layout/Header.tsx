@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 
-export const Menu = () => {
+export const Header = () => {
   const navLinkClassHandler = ({ isActive }: { isActive: boolean }) => {
     return isActive ? 'text-blue-500' : 'text-white';
   };
 
   return (
-    <div className='bg-gray-600 w-64 h-full'>
+    <div className='bg-gray-600 w-64 h-screen'>
       <ul className='flex flex-col gap-14 text-2xl pt-10 text-center'>
         <li>
           <NavLink to='/' className={navLinkClassHandler}>
