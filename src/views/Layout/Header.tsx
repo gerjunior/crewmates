@@ -2,11 +2,11 @@ import { NavLink } from 'react-router-dom';
 
 export const Header = () => {
   const navLinkClassHandler = ({ isActive }: { isActive: boolean }) => {
-    return isActive ? 'text-blue-500' : 'text-white';
+    return isActive ? 'text-blue-500 ' : 'text-white';
   };
 
   return (
-    <div className='bg-gray-600 w-64 h-screen'>
+    <div className='bg-slate-700 p-5 h-screen'>
       <ul className='flex flex-col gap-14 text-2xl pt-10 text-center'>
         <li>
           <NavLink to='/' className={navLinkClassHandler}>

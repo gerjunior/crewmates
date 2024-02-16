@@ -5,7 +5,9 @@ export const Layout = () => {
   return (
     <div className='w-screen flex'>
       <Header />
-      <Outlet />
+      <div className='w-full bg-zinc-950'>
+        <Outlet />
+      </div>
     </div>
   );
 };
