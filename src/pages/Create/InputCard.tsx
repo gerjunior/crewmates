@@ -6,6 +6,7 @@ type InputCardProps = {
   options?: string[];
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  color?: string;
 };
 
 export const InputCard = ({
@@ -16,9 +17,14 @@ export const InputCard = ({
   options,
   value,
   onChange,
+  color,
 }: InputCardProps) => {
   return (
-    <div className='bg-slate-500 p-5 rounded-xl flex flex-col'>
+    <div
+      className={`bg-slate-500 p-5 rounded-xl flex flex-col ${
+        color ? `bg-${color}-500` : ''
+      }`}
+    >
       <label htmlFor={name} className='text-2xl font-bold p-2'>
         {title}
       </label>

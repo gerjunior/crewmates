@@ -10,6 +10,8 @@ export type Crewmate = {
   color: string;
   name: string;
   speed: string;
+  isImpostor?: boolean;
+  weapon?: string;
 };
 
 export const createCrewmate = async (crewmate: Omit<Crewmate, 'id'>) => {
