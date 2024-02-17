@@ -2,6 +2,7 @@ import { useReducer, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CrewmatesImg from '../../assets/crewmates.png';
 import PeekingImg from '../../assets/peeking.png';
+import ImpostorImg from '../../assets/impostor.png';
 import { InputCard } from './InputCard';
 import { createCrewmate, updateCrewmate, deleteCrewmate } from '../../client';
 
@@ -116,7 +117,13 @@ export const Create = () => {
     <>
       <div className='p-10 flex flex-col items-center justify-center gap-10 h-screen'>
         <h3 className='text-5xl font-bold'>{titleText}</h3>
-        <img src={CrewmatesImg} alt='Crewmates' width={300} />
+
+        {crewmate.isImpostor && (
+          <img src={ImpostorImg} alt={'Impostor'} width={200} />
+        )}
+        {!crewmate.isImpostor && (
+          <img src={CrewmatesImg} alt={'Crewmates'} width={300} />
+        )}
 
         <div className='flex gap-10'>
           <div className='flex gap-10 flex-row self-start'>
@@ -225,13 +232,13 @@ export const Create = () => {
         )}
       </div>
       {!isUpdate && (
-      <img
-        src={PeekingImg}
-        alt='Peeking Crewmate'
-        width={30}
-        className='absolute bottom-0 right-0 mb-10 mr-10 cursor-pointer'
-        onClick={handleToggleCreateImpostor}
-      />
+        <img
+          src={PeekingImg}
+          alt='Peeking Crewmate'
+          width={30}
+          className='absolute bottom-0 right-0 mb-10 mr-10 cursor-pointer'
+          onClick={handleToggleCreateImpostor}
+        />
       )}
     </>
   );
