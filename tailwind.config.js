@@ -6,6 +6,7 @@ export default {
   },
   plugins: [],
   safelist: [
+    'shadow-white',
     'shadow-blue-500',
     'shadow-gray-500',
     'shadow-zinc-500',

@@ -21,8 +21,9 @@ export const Card = ({ crewmate }: CardProps) => {
   const { name, speed, color } = crewmate;
 
   const capitalizedColor = color.charAt(0).toUpperCase() + color.slice(1);
+  const lowercaseColor = color.toLowerCase();
   const shadowColor =
-    color === 'white' ? 'white' : `${color.toLowerCase()}-500`;
+    lowercaseColor === 'white' ? 'white' : `${lowercaseColor}-500`;
 
   return (
     <div
