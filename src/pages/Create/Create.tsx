@@ -119,7 +119,9 @@ export const Create = () => {
             <InputCard
               name='name'
               title='Name'
-              placeholder="Enter crewmate's name"
+              placeholder={`Enter ${
+                crewmate.isImpostor ? 'impostor' : 'crewmate'
+              }'s name`}
               value={crewmate.name}
               onChange={(e) =>
                 dispatch({ type: 'name', payload: e.target.value })
@@ -177,7 +179,11 @@ export const Create = () => {
               isLoading || !isFormFilled ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            Create Crewmate
+            {crewmate.isImpostor ? (
+              <span className={'text-red-500'}>Create Impostor</span>
+            ) : (
+              'Create Crewmate'
+            )}
           </button>
         )}
 
