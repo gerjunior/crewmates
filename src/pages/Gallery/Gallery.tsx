@@ -5,42 +5,42 @@ const crewmates = [
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'red',
   },
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'blue',
   },
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'green',
   },
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'white',
   },
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'pink',
   },
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'blue',
   },
   {
     name: 'Crewmate 1',
     speed: '3',
-    color: 'Red',
+    color: 'green',
   },
   {
     name: 'Crewmate 1asdfjasdfkajsdf;lajsdf',
     speed: '3',
-    color: 'Red',
+    color: 'yellow',
   },
 ];
 
@@ -58,9 +58,14 @@ export const Gallery = () => {
       )}
 
       {crewmates?.length && (
-        <div className='flex gap-10 justify-center flex-wrap overflow-scroll'>
+        <div className='flex gap-10 justify-center flex-wrap overflow-scroll pb-20'>
           {crewmates.map((crewmate, index) => (
-            <Card key={index} {...crewmate} />
+            <Card
+              key={index}
+              color={crewmate.color}
+              name={crewmate.name}
+              speed={crewmate.speed}
+            />
           ))}
         </div>
       )}

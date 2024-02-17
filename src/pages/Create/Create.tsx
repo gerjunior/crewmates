@@ -28,7 +28,7 @@ export const Create = () => {
             title='Color'
             type='radio'
             placeholder='Enter speed in mph'
-            options={['Red', 'Blue', 'Green', 'Yellow', 'Black', 'White']}
+            options={['Red', 'Blue', 'Green', 'Yellow', 'Pink', 'White']}
           />
         </div>
       </div>
