@@ -6,6 +6,7 @@ import { Layout } from './views/Layout/Layout.tsx';
 import { Create } from './pages/Create/Create.tsx';
 import { Gallery } from './pages/Gallery/Gallery.tsx';
 import { Home } from './pages/Home/Home.tsx';
+import { Info } from './pages/Info/Info.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'gallery',
         element: <Gallery />,
+      },
+      {
+        path: 'info/:id',
+        element: <Info />,
       },
     ],
   },

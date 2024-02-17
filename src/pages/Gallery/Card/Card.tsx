@@ -18,6 +18,10 @@ export const Card = ({ crewmate }: CardProps) => {
     navigate(`/edit/${crewmate.id}`, { state: { ...crewmate } });
   };
 
+  const handleClickIcon = () => {
+    navigate(`/info/${crewmate.id}`, { state: { ...crewmate } });
+  };
+
   const { name, speed, color } = crewmate;
 
   const capitalizedColor = color.charAt(0).toUpperCase() + color.slice(1);
@@ -29,11 +33,22 @@ export const Card = ({ crewmate }: CardProps) => {
     <div
       className={`flex flex-col gap-5 bg-slate-700 p-10 rounded-3xl items-center w-96 shadow-lg shadow-${shadowColor}`}
     >
-      <img src={EmptyCrewmate} alt='Crewmate' width={200} />
+      <img
+        src={EmptyCrewmate}
+        alt='Crewmate'
+        width={200}
+        className='rounded-full bg-slate-500 p-2 cursor-pointer hover:opacity-60 transition-opacity duration-300'
+        onClick={handleClickIcon}
+      />
       <CrewmateAttribute title='Name of Crewmate' value={name} />
       <CrewmateAttribute title='Speed of Crewmate' value={`${speed} mph`} />
       <CrewmateAttribute title='Color of Crewmate' value={capitalizedColor} />
-      <button onClick={handleClickEditCrewmate}>Edit Crewmate</button>
+      <button
+        onClick={handleClickEditCrewmate}
+        className='hover:opacity-70 transition-opacity duration-300 hover:border-white'
+      >
+        Edit Crewmate
+      </button>
     </div>
   );
 };
