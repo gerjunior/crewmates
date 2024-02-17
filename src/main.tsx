@@ -21,6 +21,10 @@ const router = createBrowserRouter([
         element: <Create />,
       },
       {
+        path: 'edit/:id',
+        element: <Create />,
+      },
+      {
         path: 'gallery',
         element: <Gallery />,
       },

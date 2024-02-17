@@ -1,13 +1,25 @@
+import { useNavigate } from 'react-router-dom';
 import EmptyCrewmate from '../../../assets/empty-crewmate.png';
 import { CrewmateAttribute } from './CrewmateAttribute';
 
 type CardProps = {
-  name: string;
-  speed: string;
-  color: string;
+  crewmate: {
+    id: string;
+    name: string;
+    speed: string;
+    color: string;
+  };
 };
 
-export const Card = ({ name, speed, color }: CardProps) => {
+export const Card = ({ crewmate }: CardProps) => {
+  const navigate = useNavigate();
+
+  const handleClickEditCrewmate = () => {
+    navigate(`/edit/${crewmate.id}`, { state: { ...crewmate } });
+  };
+
+  const { name, speed, color } = crewmate;
+
   const capitalizedColor = color.charAt(0).toUpperCase() + color.slice(1);
   const shadowColor =
     color === 'white' ? 'white' : `${color.toLowerCase()}-500`;
@@ -20,7 +32,7 @@ export const Card = ({ name, speed, color }: CardProps) => {
       <CrewmateAttribute title='Name of Crewmate' value={name} />
       <CrewmateAttribute title='Speed of Crewmate' value={`${speed} mph`} />
       <CrewmateAttribute title='Color of Crewmate' value={capitalizedColor} />
-      <button>Edit Crewmate</button>
+      <button onClick={handleClickEditCrewmate}>Edit Crewmate</button>
     </div>
   );
 };

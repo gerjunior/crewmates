@@ -6,13 +6,27 @@ const url = 'https://cocmrlpyomggokmehadt.supabase.co';
 const supabase = createClient(url, API_KEY);
 
 export type Crewmate = {
+  id: string;
   color: string;
   name: string;
   speed: string;
 };
 
-export const createCrewmate = async (crewmate: unknown) => {
+export const createCrewmate = async (crewmate: Omit<Crewmate, 'id'>) => {
   const { error } = await supabase.from('crewmates').insert(crewmate);
+  if (error) {
+    console.error(error);
+  }
+  return {
+    error,
+  };
+};
+
+export const updateCrewmate = async (id: string, crewmate: Crewmate) => {
+  const { error } = await supabase
+    .from('crewmates')
+    .update(crewmate)
+    .eq('id', id);
   if (error) {
     console.error(error);
   }

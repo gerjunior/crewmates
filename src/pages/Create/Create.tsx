@@ -1,11 +1,12 @@
 import { useReducer, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Crewmates from '../../assets/crewmates.png';
 import { InputCard } from './InputCard';
-import { createCrewmate } from '../../client';
+import { createCrewmate, updateCrewmate } from '../../client';
 
 type Action = { type: string; payload: string };
 type CrewmateState = {
+  id?: string;
   name: string;
   speed: string;
   color: string;
@@ -24,13 +25,18 @@ const crewmateReducer = (
 };
 
 export const Create = () => {
-  const [createdCrewmate, setCreatedCrewmate] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [crewmate, _dispatch] = useReducer(crewmateReducer, {
+  const { state } = useLocation();
+  const isUpdate = !!state && !!state.id;
+
+  const crewmateDefault = (state as CrewmateState) || {
     name: '',
     speed: '',
     color: '',
-  });
+  };
+
+  const [createdCrewmate, setCreatedCrewmate] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [crewmate, _dispatch] = useReducer(crewmateReducer, crewmateDefault);
 
   const dispatch = (data: Action) => {
     if (createdCrewmate) {
@@ -45,6 +51,19 @@ export const Create = () => {
     if (!error) {
       setCreatedCrewmate(crewmate.name);
       dispatch({ type: 'reset', payload: '' });
+    }
+    setIsLoading(false);
+  };
+
+  const handleUpdateCrewmate = async () => {
+    setIsLoading(true);
+    const id = (state as CrewmateState).id!;
+    const { error } = await updateCrewmate(id, {
+      ...crewmate,
+      id,
+    });
+    if (!error) {
+      setCreatedCrewmate(crewmate.name);
     }
     setIsLoading(false);
   };
@@ -94,20 +113,36 @@ export const Create = () => {
         </div>
       </div>
 
-      <button
-        onClick={handleCreateCrewmate}
-        disabled={isLoading}
-        className={`${
-          isLoading || !isFormFilled ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-      >
-        Create Crewmate
-      </button>
+      {!isUpdate && (
+        <button
+          onClick={handleCreateCrewmate}
+          disabled={isLoading}
+          className={`${
+            isLoading || !isFormFilled ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+        >
+          Create Crewmate
+        </button>
+      )}
+
+      {isUpdate && (
+        <button
+          onClick={handleUpdateCrewmate}
+          disabled={isLoading}
+          className={`${
+            isLoading || !isFormFilled ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+        >
+          Update Crewmate
+        </button>
+      )}
 
       {createdCrewmate && (
         <div className='flex flex-col items-center gap-5'>
-          <p className='text-xl'>{createdCrewmate} was created!</p>
-          <Link to='/gallery'>View</Link>
+          <p className='text-xl'>
+            {createdCrewmate} was {isUpdate ? 'updated' : 'created'}!
+          </p>
+          <Link to='/gallery'>View Gallery</Link>
         </div>
       )}
     </div>

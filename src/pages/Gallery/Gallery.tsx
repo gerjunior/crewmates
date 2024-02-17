@@ -20,13 +20,8 @@ export const Gallery = () => {
 
       {crewmates?.length && (
         <div className='flex gap-10 justify-center flex-wrap overflow-scroll pb-20'>
-          {crewmates.map((crewmate, index) => (
-            <Card
-              key={index}
-              color={crewmate.color}
-              name={crewmate.name}
-              speed={crewmate.speed}
-            />
+          {crewmates.map((crewmate) => (
+            <Card key={crewmate.id} crewmate={crewmate} />
           ))}
         </div>
       )}
