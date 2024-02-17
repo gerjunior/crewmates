@@ -96,7 +96,11 @@ export const Create = () => {
     dispatch({ type: 'isImpostor', payload: !crewmate.isImpostor });
   };
 
-  const isFormFilled = Object.values(crewmate).every((value) => value);
+  const isFormFilled =
+    crewmate.name &&
+    crewmate.speed &&
+    crewmate.color &&
+    (!crewmate.isImpostor || crewmate.weapon);
 
   const titleText = (() => {
     if (isUpdate) {
