@@ -1,8 +1,8 @@
 import { useReducer, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Crewmates from '../../assets/crewmates.png';
 import { InputCard } from './InputCard';
-import { createCrewmate, updateCrewmate } from '../../client';
+import { createCrewmate, updateCrewmate, deleteCrewmate } from '../../client';
 
 type Action = { type: string; payload: string };
 type CrewmateState = {
@@ -26,6 +26,7 @@ const crewmateReducer = (
 
 export const Create = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const isUpdate = !!state && !!state.id;
 
   const crewmateDefault = (state as CrewmateState) || {
@@ -66,6 +67,24 @@ export const Create = () => {
       setCreatedCrewmate(crewmate.name);
     }
     setIsLoading(false);
+  };
+
+  const handleDeleteCrewmate = async () => {
+    setIsLoading(true);
+    const { error } = await deleteCrewmate((state as CrewmateState).id!);
+    if (!error) {
+      navigate('/gallery');
+    }
+  };
+
+  const handleConfirmDeletion = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to throw out ${crewmate.name} into space?`,
+    );
+    if (confirmed) {
+      handleDeleteCrewmate();
+    }
+    e.currentTarget.blur();
   };
 
   const isFormFilled = Object.values(crewmate).every((value) => value);
@@ -127,15 +146,25 @@ export const Create = () => {
       )}
 
       {isUpdate && (
-        <button
-          onClick={handleUpdateCrewmate}
-          disabled={isLoading}
-          className={`${
-            isLoading || !isFormFilled ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          Update Crewmate
-        </button>
+        <div className='flex flex-row gap-10'>
+          <button
+            onClick={handleUpdateCrewmate}
+            disabled={isLoading}
+            className={`${
+              isLoading || !isFormFilled ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            Update Crewmate
+          </button>
+
+          <button
+            onClick={handleConfirmDeletion}
+            disabled={isLoading}
+            className='text-red-500'
+          >
+            Throw Out Crewmate
+          </button>
+        </div>
       )}
 
       {createdCrewmate && (
