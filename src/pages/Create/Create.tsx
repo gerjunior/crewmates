@@ -224,6 +224,7 @@ export const Create = () => {
           </div>
         )}
       </div>
+      {!isUpdate && (
       <img
         src={PeekingImg}
         alt='Peeking Crewmate'
@@ -231,6 +232,7 @@ export const Create = () => {
         className='absolute bottom-0 right-0 mb-10 mr-10 cursor-pointer'
         onClick={handleToggleCreateImpostor}
       />
+      )}
     </>
   );
 };
