@@ -69,10 +69,11 @@ export const Create = () => {
   };
 
   const isFormFilled = Object.values(crewmate).every((value) => value);
+  const titleText = isUpdate ? 'Update Crewmate' : 'Create a New Crewmate!';
 
   return (
     <div className='p-10 flex flex-col items-center justify-center gap-10 h-screen'>
-      <h3 className='text-5xl font-bold'>Create a New Crewmate!</h3>
+      <h3 className='text-5xl font-bold'>{titleText}</h3>
       <img src={Crewmates} alt='Crewmates' width={300} />
 
       <div className='flex gap-10'>
