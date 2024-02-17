@@ -9,7 +9,8 @@ type CardProps = {
 
 export const Card = ({ name, speed, color }: CardProps) => {
   const capitalizedColor = color.charAt(0).toUpperCase() + color.slice(1);
-  const shadowColor = color === 'white' ? 'white' : `${color}-500`;
+  const shadowColor =
+    color === 'white' ? 'white' : `${color.toLowerCase()}-500`;
 
   return (
     <div
